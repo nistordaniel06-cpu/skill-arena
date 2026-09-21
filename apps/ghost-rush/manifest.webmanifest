@@ -1,7 +1,7 @@
 {
-  "name":"Ghost Rush",
+  "name":"Ghost Rush V4",
   "short_name":"Ghost Rush",
-  "description":"Fast skill sprints against recorded player ghosts.",
+  "description":"Fast competitive micro-games against recorded player ghosts.",
   "start_url":"./",
   "display":"standalone",
   "background_color":"#050815",
