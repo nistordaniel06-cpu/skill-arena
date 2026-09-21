@@ -4,167 +4,42 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
   <meta name="theme-color" content="#070b1b" />
-  <title>Ghost Rush — MVP</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>Ghost Rush — V2</title>
   <style>
-    :root{--bg:#070b1b;--panel:#0f1732;--panel2:#111d3c;--text:#f7f8ff;--muted:#94a3c7;--cyan:#56e8ff;--violet:#8b5cf6;--pink:#ff4fd8;--green:#56f39a;--danger:#ff5a7a;--gold:#ffd166}
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#14204a 0,#070b1b 45%,#03050d 100%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
-    body{display:flex;justify-content:center}
-    .app{width:min(100%,480px);min-height:100vh;padding:18px 16px 28px;position:relative}
-    .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.03em}.ghostLogo{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--violet) 55%,var(--pink));box-shadow:0 0 30px #7c3aed66;font-size:22px}.currency{display:flex;gap:8px;font-size:13px}.pill{background:#111a36;border:1px solid #28345d;border-radius:999px;padding:8px 10px;color:#dbe6ff}.screen{display:none}.screen.active{display:block}.hero{background:linear-gradient(180deg,#111d42cc,#0b1024ee);border:1px solid #263565;border-radius:28px;padding:24px;box-shadow:0 18px 50px #0008,inset 0 1px #ffffff12;overflow:hidden;position:relative}.hero:before{content:"";position:absolute;inset:-50% 25% auto -10%;height:220px;background:radial-gradient(circle,#744df05e,transparent 70%);pointer-events:none}.kicker{font-size:12px;letter-spacing:.22em;color:var(--cyan);font-weight:800}.title{font-size:42px;line-height:.92;margin:12px 0 8px;font-weight:1000;letter-spacing:-.05em;text-transform:uppercase}.title span{background:linear-gradient(90deg,var(--cyan),#a78bfa,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}.sub{color:var(--muted);font-size:14px;line-height:1.5}.playBtn{width:100%;border:0;border-radius:20px;padding:18px 20px;margin-top:20px;font-size:18px;font-weight:900;color:white;background:linear-gradient(90deg,#6d4aff,#9e43ff 55%,#ff4fd8);box-shadow:0 14px 35px #744df055;cursor:pointer}.daily{margin-top:14px;padding:16px;border-radius:20px;background:#0a1026;border:1px solid #24345e}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.daily h3,.sectionTitle{margin:0;font-size:15px}.muted{color:var(--muted);font-size:12px}.board{display:grid;gap:8px;margin-top:12px}.boardRow{display:grid;grid-template-columns:34px 1fr auto;align-items:center;padding:10px 12px;border-radius:14px;background:#111a34;color:#dbe6ff}.boardRow.you{outline:1px solid #7452ff;background:#171b3f}.rank{color:var(--gold);font-weight:900}.time{font-variant-numeric:tabular-nums;font-weight:800}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.card{background:linear-gradient(180deg,#10182f,#0b1021);border:1px solid #263154;border-radius:20px;padding:16px}.card b{display:block;margin-bottom:6px}.card .big{font-size:26px;font-weight:1000;color:white}.gameShell{background:#050914;border:1px solid #27355f;border-radius:28px;overflow:hidden;box-shadow:0 18px 55px #000a}.hud{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:14px 14px 10px;background:#0b1022}.hudBox{font-size:12px;color:var(--muted)}.hudBox strong{display:block;color:white;font-size:20px;font-variant-numeric:tabular-nums}.hudBox.right{text-align:right}.versus{font-size:11px;font-weight:900;color:#a78bfa;letter-spacing:.16em}.canvasWrap{position:relative;aspect-ratio:9/14;background:linear-gradient(#0b1534,#07101f)}canvas{width:100%;height:100%;display:block;touch-action:none}.hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font-size:12px;padding:9px 13px;border-radius:999px;background:#030712bb;border:1px solid #2b3d71;color:#d9e3ff;backdrop-filter:blur(10px)}.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px;background:#0b1022}.ctrl{border:1px solid #324272;background:#111a36;color:white;border-radius:16px;padding:15px;font-size:22px;font-weight:900}.resultHero{text-align:center;background:linear-gradient(180deg,#10193d,#080e22);border:1px solid #263565;border-radius:28px;padding:30px 22px}.win{font-size:38px;font-weight:1000;color:var(--green);margin:0}.lose{font-size:38px;font-weight:1000;color:var(--danger);margin:0}.resultTime{font-size:58px;font-weight:1000;letter-spacing:-.05em;margin:6px 0;font-variant-numeric:tabular-nums}.compare{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin:22px 0}.fighter{padding:14px;border-radius:18px;background:#111a36;border:1px solid #2b3760}.fighter strong{display:block;font-size:20px;margin-top:4px}.actionGrid{display:grid;gap:10px}.secondary{width:100%;border:1px solid #30406d;border-radius:18px;padding:15px;background:#101932;color:#eef3ff;font-weight:800}.accent{background:linear-gradient(90deg,#6d4aff,#a044ff);border:0}.miniNav{display:flex;justify-content:space-around;margin-top:16px;color:#7280a6;font-size:11px}.miniNav b{color:white}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:#10182f;border:1px solid #314372;color:white;padding:12px 16px;border-radius:999px;transition:.25s;z-index:10}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    :root{--bg:#050815;--panel:#0c1430;--panel2:#111b3e;--text:#f8f9ff;--muted:#8f9cc4;--cyan:#55eaff;--violet:#8157ff;--pink:#ff4fd8;--green:#4ff0a0;--red:#ff5b7c;--gold:#ffd166}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent} html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% -10%,#172653 0,#070b1b 42%,#03050d 100%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} body{display:flex;justify-content:center}.app{width:min(100%,500px);min-height:100vh;padding:16px 14px 28px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.brand{display:flex;align-items:center;gap:10px;font-weight:950}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--violet),var(--pink));box-shadow:0 0 34px #8057ff66;font-size:22px}.topright{display:flex;align-items:center;gap:7px}.pill{border:1px solid #293760;background:#0c1530;padding:8px 10px;border-radius:999px;color:#dce6ff;font-size:12px}.online{font-size:10px;color:var(--muted)}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#657197;margin-right:5px}.dot.live{background:var(--green);box-shadow:0 0 12px #4ff0a099}.screen{display:none}.screen.active{display:block}.panel{background:linear-gradient(180deg,#101b3ddd,#090e22f2);border:1px solid #273660;border-radius:28px;padding:22px;box-shadow:0 18px 55px #0009}.kicker{font-size:11px;font-weight:900;letter-spacing:.2em;color:var(--cyan)}.heroTitle{font-weight:1000;font-size:45px;line-height:.9;letter-spacing:-.055em;margin:12px 0 10px}.grad{background:linear-gradient(90deg,var(--cyan),#b37aff,var(--pink));-webkit-background-clip:text;background-clip;color:transparent}.sub{color:var(--muted);font-size:13px;line-height:1.5}.challengeBanner{display:none;margin:15px 0 0;padding:14px;border-radius:18px;background:linear-gradient(90deg,#17204b,#241447);border:1px solid #664df0}.challengeBanner.show{display:block}.challengeBanner b{display:block}.primary,.secondary{width:100%;border:0;border-radius:18px;padding:16px;font-weight:950;color:white;cursor:pointer}.primary{margin-top:18px;background:linear-gradient(90deg,#684cff,#9d45ff 55%,#ff4fd8);box-shadow:0 14px 32px #7c4dff4d;font-size:17px}.secondary{background:#111a36;border:1px solid #31406e;margin-top:9px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}.stat{border-radius:19px;padding:15px;background:#0b1229;border:1px solid #24345d}.stat strong{display:block;font-size:25px;margin-top:4px}.daily{margin-top:14px;padding:15px;border-radius:20px;background:#090f23;border:1px solid #23345e}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.muted{color:var(--muted);font-size:12px}.board{display:grid;gap:7px;margin-top:10px}.boardRow{display:grid;grid-template-columns:30px 1fr auto;gap:9px;align-items:center;padding:10px;border-radius:13px;background:#101934}.boardRow.you{outline:1px solid #7355ff}.rankNo{font-weight:950;color:var(--gold)}.time{font-variant-numeric:tabular-nums;font-weight:900}.nav{position:sticky;bottom:10px;margin-top:15px;padding:8px;border-radius:20px;background:#081020e8;border:1px solid #28365f;display:grid;grid-template-columns:repeat(3,1fr);backdrop-filter:blur(12px)}.nav button{border:0;background:transparent;color:#7885ac;padding:9px 5px;font-weight:800}.nav button.active{color:white}.gameShell{border:1px solid #2a3863;border-radius:28px;overflow:hidden;background:#060a16;box-shadow:0 18px 55px #000a}.hud{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px;background:#0b1125}.hudBox{font-size:11px;color:var(--muted)}.hudBox strong{display:block;color:#fff;font-size:19px}.hudBox.right{text-align:right}.vs{font-size:10px;letter-spacing:.16em;color:#a78bfa;font-weight:950}.canvasWrap{position:relative;aspect-ratio:9/14;background:linear-gradient(#0b1534,#07101f)}canvas{display:block;width:100%;height:100%;touch-action:none}.hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:#030712c9;border:1px solid #304275;color:#dce7ff;padding:8px 12px;border-radius:999px;font-size:11px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:11px;background:#0b1125}.ctrl{border:1px solid #314273;background:#121c3a;color:white;border-radius:15px;padding:14px;font-size:21px}.result{text-align:center}.headline{font-size:38px;font-weight:1000;margin:0}.win{color:var(--green)}.lose{color:var(--red)}.resultTime{font-size:58px;font-weight:1000;letter-spacing:-.05em;margin:3px 0}.compare{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:20px 0}.fighter{background:#111a36;border:1px solid #2d3c67;border-radius:17px;padding:13px}.fighter strong{display:block;font-size:19px;margin-top:4px}.sectionTitle{font-size:20px;margin:0 0 4px}.profileCard{display:grid;gap:12px}.avatar{width:76px;height:76px;border-radius:24px;display:grid;place-items:center;font-size:36px;background:linear-gradient(135deg,#203260,#382068);border:1px solid #6f55ff}.field{width:100%;background:#0a1127;border:1px solid #2a3964;border-radius:14px;padding:13px;color:white;font:inherit}.rankCard{padding:15px;border-radius:18px;background:linear-gradient(135deg,#19183d,#0b1531);border:1px solid #443d83}.progress{height:9px;border-radius:99px;background:#080d1c;overflow:hidden;margin-top:9px}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--violet));width:35%}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:#10182f;border:1px solid #314372;padding:11px 15px;border-radius:999px;transition:.22s;z-index:20;max-width:88%;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   </style>
 </head>
 <body>
 <div class="app">
-  <div class="topbar">
-    <div class="brand"><div class="ghostLogo">👻</div><div>GHOST RUSH</div></div>
-    <div class="currency"><span class="pill">🪙 <b id="coins">420</b></span><span class="pill">💎 12</span></div>
-  </div>
+  <div class="topbar"><div class="brand"><div class="logo">👻</div><div>GHOST RUSH <span style="color:#8e79ff">V2</span></div></div><div class="topright"><span class="pill">🪙 <b id="coins">420</b></span><span class="online"><i id="onlineDot" class="dot"></i><span id="onlineLabel">connecting</span></span></div></div>
 
   <section id="home" class="screen active">
-    <div class="hero">
-      <div class="kicker">BEAT EVERYONE</div>
-      <div class="title">GHOST<br><span>RUSH</span></div>
-      <div class="sub">30-second skill runs. Race a ghost, beat the time, send the challenge back.</div>
-      <button class="playBtn" id="playBtn">▶ PLAY DAILY RUN</button>
-      <div class="daily">
-        <div class="row"><h3>👑 Daily Challenge</h3><span class="muted" id="dailySeedLabel"></span></div>
-        <div class="board" id="homeBoard"></div>
-      </div>
+    <div class="panel">
+      <div class="kicker">BEAT EVERYONE</div><div class="heroTitle">GHOST<br><span class="grad">RUSH</span></div>
+      <div class="sub">Fast skill runs against real recorded ghosts. Beat the time, send the link back, climb the daily board.</div>
+      <div id="challengeBanner" class="challengeBanner"><b id="challengeTitle">A ghost challenged you</b><span id="challengeText" class="muted"></span></div>
+      <button id="playBtn" class="primary">▶ PLAY DAILY RUN</button>
+      <div class="daily"><div class="row"><b>👑 Daily leaderboard</b><span id="dailySeedLabel" class="muted"></span></div><div id="homeBoard" class="board"></div></div>
     </div>
-    <div class="cards">
-      <div class="card"><b>🔥 Streak</b><div class="big" id="streak">3</div><span class="muted">days</span></div>
-      <div class="card"><b>🏁 Best</b><div class="big" id="bestLabel">--</div><span class="muted">this device</span></div>
-    </div>
-    <div class="miniNav"><b>HOME</b><span>GAMES</span><span>FRIENDS</span><span>SHOP</span></div>
+    <div class="grid2"><div class="stat">🏁 Best<strong id="bestLabel">--</strong><span class="muted">today</span></div><div class="stat">⚡ Rank<strong id="rankLabel">Rookie</strong><span id="rankPoints" class="muted">0 RP</span></div></div>
   </section>
 
   <section id="game" class="screen">
-    <div class="gameShell">
-      <div class="hud">
-        <div class="hudBox">YOU<strong id="youTime">0.00</strong></div>
-        <div class="versus">VS GHOST</div>
-        <div class="hudBox right">GHOST<strong id="ghostTime">21.43</strong></div>
-      </div>
-      <div class="canvasWrap">
-        <canvas id="gameCanvas" width="720" height="1120"></canvas>
-        <div class="hint" id="hint">Swipe or tap ◀ ▶</div>
-      </div>
-      <div class="controls"><button class="ctrl" id="leftBtn">◀</button><button class="ctrl" id="rightBtn">▶</button></div>
-    </div>
+    <div class="gameShell"><div class="hud"><div class="hudBox">YOU<strong id="youTime">0.00</strong></div><div class="vs">VS GHOST</div><div class="hudBox right"><span id="ghostName">GHOST</span><strong id="ghostTime">21.43</strong></div></div><div class="canvasWrap"><canvas id="gameCanvas" width="720" height="1120"></canvas><div id="hint" class="hint">Swipe / tap ◀ ▶</div></div><div class="controls"><button id="leftBtn" class="ctrl">◀</button><button id="rightBtn" class="ctrl">▶</button></div></div>
   </section>
 
-  <section id="result" class="screen">
-    <div class="resultHero">
-      <p id="resultHeadline" class="win">YOU WIN!</p>
-      <div id="resultTime" class="resultTime">21.20s</div>
-      <div class="muted" id="pbText">New personal best</div>
-      <div class="compare">
-        <div class="fighter">YOU<strong id="resultYou">21.20s</strong></div>
-        <div class="versus">VS</div>
-        <div class="fighter">GHOST<strong id="resultGhost">21.43s</strong></div>
-      </div>
-      <div class="actionGrid">
-        <button class="secondary accent" id="rematchBtn">↻ REMATCH</button>
-        <button class="secondary" id="shareBtn">↗ CHALLENGE A FRIEND</button>
-        <button class="secondary" id="homeBtn">⌂ BACK HOME</button>
-      </div>
-    </div>
-  </section>
+  <section id="result" class="screen"><div class="panel result"><p id="resultHeadline" class="headline win">YOU WIN!</p><div id="resultTime" class="resultTime">21.20s</div><div id="pbText" class="muted"></div><div class="compare"><div class="fighter">YOU<strong id="resultYou">--</strong></div><div class="vs">VS</div><div class="fighter"><span id="resultGhostName">GHOST</span><strong id="resultGhost">--</strong></div></div><button id="rematchBtn" class="primary">↻ REMATCH</button><button id="shareBtn" class="secondary">↗ CHALLENGE A FRIEND</button><button id="homeBtn" class="secondary">⌂ BACK HOME</button></div></section>
+
+  <section id="leaderboard" class="screen"><div class="panel"><h2 class="sectionTitle">Global Daily</h2><div class="sub">Best online runs for today's course.</div><div id="fullBoard" class="board" style="margin-top:16px"></div><button id="refreshBoardBtn" class="secondary">↻ REFRESH</button></div></section>
+
+  <section id="profile" class="screen"><div class="panel profileCard"><div class="avatar">👻</div><div><h2 class="sectionTitle">Your Ghost</h2><div id="profileId" class="muted">Local player</div></div><label class="muted">Display name</label><input id="displayName" class="field" maxlength="20" placeholder="Ghost" /><button id="saveProfileBtn" class="secondary">SAVE PROFILE</button><div class="rankCard"><b id="profileRank">Rookie</b><div id="profileRp" class="muted">0 RP</div><div class="progress"><i id="rankProgress"></i></div></div><div class="grid2" style="margin:0"><div class="stat">🪙 Coins<strong id="profileCoins">420</strong></div><div class="stat">🏁 Best<strong id="profileBest">--</strong></div></div></div></section>
+
+  <nav id="nav" class="nav"><button data-screen="home" class="active">⌂ HOME</button><button data-screen="leaderboard">🏆 BOARD</button><button data-screen="profile">👻 PROFILE</button></nav>
 </div>
-<div class="toast" id="toast"></div>
-<script>
-(() => {
-  const $ = s => document.querySelector(s);
-  const screens = ['home','game','result'];
-  const canvas = $('#gameCanvas'), ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-  const trackLeft = 115, trackRight = 605, lanes = [200,360,520];
-  const RUN_DISTANCE = 7600, BASE_SPEED = 300;
-  const GHOST_TARGET = 21.43;
-  const storageKey = 'ghostRushMVP-v1';
-  let state = JSON.parse(localStorage.getItem(storageKey) || '{}');
-  state.best = state.best || null; state.bestActions = state.bestActions || []; state.coins = state.coins || 420;
-  let playing=false,start=0,last=0,elapsed=0,distance=0,lane=1,dead=false,actions=[],obstacles=[],particles=[];
-  let ghostLane=1,ghostDistance=0,ghostActionIndex=0,ghostActions=[];
-  let touchStartX=null;
-
-  function save(){ localStorage.setItem(storageKey,JSON.stringify(state)); }
-  function show(id){ screens.forEach(s => $('#'+s).classList.toggle('active',s===id)); window.scrollTo(0,0); }
-  function fmt(t){ return Number(t).toFixed(2)+'s'; }
-  function dailySeed(){ const d=new Date(); return Number(`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`); }
-  function rng(seed){ let t=seed+0x6D2B79F5; return () => { t+=0x6D2B79F5; let r=Math.imul(t^t>>>15,1|t); r^=r+Math.imul(r^r>>>7,61|r); return ((r^r>>>14)>>>0)/4294967296; }; }
-  function buildTrack(){
-    const r=rng(dailySeed()); obstacles=[]; let y=900;
-    while(y<RUN_DISTANCE-400){ y += 250 + r()*220; const blockCount=r()<.22?2:1; let used=[]; for(let i=0;i<blockCount;i++){ let l=Math.floor(r()*3); while(used.includes(l)) l=(l+1)%3; used.push(l); obstacles.push({lane:l,dist:y,w:110,h:64,type:r()<.18?'boost':'block'}); } }
-  }
-  function defaultGhost(){
-    const r=rng(dailySeed()+77), arr=[]; let t=.8,l=1;
-    while(t<20.8){ t += .55+r()*1.2; const next=Math.max(0,Math.min(2,l+(r()<.5?-1:1))); if(next!==l){ arr.push({t,next}); l=next; } }
-    return arr;
-  }
-  function setLane(next){ if(!playing) return; next=Math.max(0,Math.min(2,next)); if(next!==lane){ lane=next; actions.push({t:elapsed,next}); burst(lanes[lane],H*.77,'#56e8ff'); } }
-  function burst(x,y,c){ for(let i=0;i<10;i++) particles.push({x,y,vx:(Math.random()-.5)*180,vy:(Math.random()-.5)*180,life:.6,c}); }
-  function resetRun(){
-    buildTrack(); playing=true; dead=false; elapsed=0; distance=0; lane=1; actions=[]; particles=[]; start=performance.now(); last=start;
-    ghostLane=1; ghostDistance=0; ghostActionIndex=0; ghostActions=state.bestActions.length?state.bestActions:defaultGhost();
-    $('#hint').style.opacity='1'; show('game'); requestAnimationFrame(loop);
-  }
-  function finish(forceLose=false){
-    if(!playing) return; playing=false;
-    const finalTime = forceLose ? elapsed+1.4 : elapsed;
-    const won = finalTime < GHOST_TARGET;
-    const isPB = !state.best || finalTime < state.best;
-    if(isPB && !forceLose){ state.best=finalTime; state.bestActions=actions; state.coins += 50; save(); }
-    $('#resultHeadline').textContent=won?'YOU WIN!':'SO CLOSE!'; $('#resultHeadline').className=won?'win':'lose';
-    $('#resultTime').textContent=fmt(finalTime); $('#resultYou').textContent=fmt(finalTime); $('#resultGhost').textContent=fmt(GHOST_TARGET);
-    $('#pbText').textContent=isPB&&!forceLose?'New personal best • +50 coins':won?'Ghost beaten. Send the challenge back.':'Missed the ghost — rematch?';
-    show('result'); refreshHome();
-  }
-  function loop(now){
-    if(!playing) return; const dt=Math.min(.033,(now-last)/1000); last=now; elapsed=(now-start)/1000;
-    const speed=BASE_SPEED + Math.min(75,elapsed*3.2); distance += speed*dt; ghostDistance = RUN_DISTANCE*(elapsed/GHOST_TARGET);
-    while(ghostActionIndex<ghostActions.length && ghostActions[ghostActionIndex].t<=elapsed){ ghostLane=ghostActions[ghostActionIndex].next; ghostActionIndex++; }
-    $('#youTime').textContent=elapsed.toFixed(2); $('#ghostTime').textContent=GHOST_TARGET.toFixed(2);
-    if(elapsed>2) $('#hint').style.opacity='0';
-    checkCollision(); updateParticles(dt); draw();
-    if(distance>=RUN_DISTANCE) return finish(false);
-    if(elapsed>30) return finish(true);
-    requestAnimationFrame(loop);
-  }
-  function checkCollision(){
-    for(const o of obstacles){ const delta=o.dist-distance; if(delta>0&&delta<58&&o.lane===lane){ if(o.type==='boost'){ distance+=145; o.dist=-9999; burst(lanes[lane],H*.77,'#56f39a'); } else { o.dist=-9999; distance=Math.max(0,distance-240); burst(lanes[lane],H*.77,'#ff5a7a'); navigator.vibrate?.(45); } } }
-  }
-  function updateParticles(dt){ for(const p of particles){ p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt; } particles=particles.filter(p=>p.life>0); }
-  function project(dist,laneX){ const rel=dist-distance; const horizon=H*.19, playerY=H*.78; const z=Math.max(-.1,Math.min(1.18,1-rel/1500)); const y=horizon+(playerY-horizon)*z; const scale=.25+.9*z; const center=W/2; const x=center+(laneX-center)*scale; return {x,y,scale}; }
-  function draw(){
-    ctx.clearRect(0,0,W,H); const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#111d49');g.addColorStop(.48,'#08152f');g.addColorStop(1,'#040914');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-    ctx.fillStyle='#18204a'; for(let i=0;i<28;i++){ const x=(i*73)%W,y=80+((i*127)%280); ctx.fillRect(x,y,28,80+((i*31)%120)); }
-    const horizon=H*.19,py=H*.83; ctx.beginPath();ctx.moveTo(W/2-60,horizon);ctx.lineTo(trackLeft,py);ctx.lineTo(trackRight,py);ctx.lineTo(W/2+60,horizon);ctx.closePath();ctx.fillStyle='#0a1430';ctx.fill();ctx.strokeStyle='#283e7a';ctx.lineWidth=4;ctx.stroke();
-    for(let i=0;i<3;i++){ const topX=W/2+(lanes[i]-W/2)*.12; ctx.beginPath();ctx.moveTo(topX,horizon);ctx.lineTo(lanes[i],py);ctx.strokeStyle='#2b3f75';ctx.lineWidth=2;ctx.stroke(); }
-    for(let d=Math.floor(distance/220)*220; d<distance+1800; d+=220){ const p=project(d,W/2); const z=Math.max(.1,p.scale); ctx.fillStyle='rgba(86,232,255,.14)';ctx.fillRect(W/2-210*z,p.y,420*z,5*z); }
-    const visible=obstacles.filter(o=>o.dist>distance-100&&o.dist<distance+1700).sort((a,b)=>b.dist-a.dist);
-    for(const o of visible){ const p=project(o.dist,lanes[o.lane]); const w=o.w*p.scale,h=o.h*p.scale; ctx.shadowBlur=18*p.scale;ctx.shadowColor=o.type==='boost'?'#56f39a':'#ff4fd8';ctx.fillStyle=o.type==='boost'?'#1bdc79':'#d83ea8';ctx.fillRect(p.x-w/2,p.y-h,w,h);ctx.shadowBlur=0; }
-    const gp=project(distance+Math.max(-120,Math.min(220,ghostDistance-distance)),lanes[ghostLane]); ctx.globalAlpha=.48; ctx.shadowBlur=30;ctx.shadowColor='#8b5cf6';ctx.fillStyle='#9b87ff';ctx.beginPath();ctx.arc(gp.x,gp.y-32,30,0,Math.PI*2);ctx.fill();ctx.fillRect(gp.x-28,gp.y-30,56,58);ctx.shadowBlur=0;ctx.globalAlpha=1;
-    const px=lanes[lane],y=H*.78; ctx.shadowBlur=26;ctx.shadowColor='#56e8ff';ctx.fillStyle='#0c1632';ctx.beginPath();ctx.arc(px,y-46,34,0,Math.PI*2);ctx.fill();ctx.fillStyle='#56e8ff';ctx.fillRect(px-31,y-42,62,78);ctx.fillStyle='#0b1022';ctx.fillRect(px-20,y-20,40,36);ctx.fillStyle='#ffd166';ctx.font='900 22px system-ui';ctx.textAlign='center';ctx.fillText('⚡',px,y+8);ctx.shadowBlur=0;
-    for(const p of particles){ ctx.globalAlpha=Math.max(0,p.life/.6);ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,8,8); } ctx.globalAlpha=1;
-    const progress=Math.min(1,distance/RUN_DISTANCE); ctx.fillStyle='#172445';ctx.fillRect(90,34,W-180,12); const pg=ctx.createLinearGradient(90,0,W-90,0);pg.addColorStop(0,'#56e8ff');pg.addColorStop(1,'#a855f7');ctx.fillStyle=pg;ctx.fillRect(90,34,(W-180)*progress,12);
-  }
-  function refreshHome(){
-    $('#coins').textContent=state.coins; $('#bestLabel').textContent=state.best?state.best.toFixed(2)+'s':'--'; $('#dailySeedLabel').textContent='Daily #'+String(dailySeed()).slice(-4);
-    const you=state.best||22.17; const rows=[['1','Dan',GHOST_TARGET],['2','Alex',21.88],['3','You',you]].sort((a,b)=>a[2]-b[2]);
-    $('#homeBoard').innerHTML=rows.map((r,i)=>`<div class="boardRow ${r[1]==='You'?'you':''}"><span class="rank">${i+1}</span><span>${r[1]}</span><span class="time">${r[2].toFixed(2)}s</span></div>`).join('');
-  }
-  function toast(msg){ const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800); }
-  async function share(){ const text=`I ran ${state.best?state.best.toFixed(2):'--'}s in Ghost Rush. Beat my ghost 👻`; if(navigator.share){ try{await navigator.share({title:'Ghost Rush Challenge',text,url:location.href});}catch{} } else { await navigator.clipboard?.writeText(text+' '+location.href); toast('Challenge copied'); } }
-
-  $('#playBtn').onclick=resetRun; $('#rematchBtn').onclick=resetRun; $('#homeBtn').onclick=()=>{show('home');refreshHome();}; $('#shareBtn').onclick=share;
-  $('#leftBtn').onclick=()=>setLane(lane-1); $('#rightBtn').onclick=()=>setLane(lane+1);
-  canvas.addEventListener('pointerdown',e=>{touchStartX=e.clientX});
-  canvas.addEventListener('pointerup',e=>{if(touchStartX==null)return;const dx=e.clientX-touchStartX;if(Math.abs(dx)>25)setLane(lane+(dx>0?1:-1));else setLane(lane+(e.clientX<innerWidth/2?-1:1));touchStartX=null});
-  window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')setLane(lane-1);if(e.key==='ArrowRight'||e.key==='d')setLane(lane+1)});
-  refreshHome(); buildTrack(); draw();
-})();
-</script>
-</body>
-</html>
+<div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body></html>
