@@ -1,0 +1,9 @@
+{
+  "name":"Ghost Rush V2",
+  "short_name":"Ghost Rush",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#050815",
+  "theme_color":"#070b1b",
+  "description":"Fast skill runs against recorded player ghosts."
+}
