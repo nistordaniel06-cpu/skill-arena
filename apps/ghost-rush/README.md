@@ -1,41 +1,44 @@
-# Ghost Rush MVP
+# Ghost Rush V2
 
-Playable mobile-first vertical slice for the Ghost Rush concept.
+Mobile-first competitive micro-game prototype with real recorded challenge links.
 
-## Current gameplay
-- 30-second skill run
-- Three-lane swipe/tap controls
-- Deterministic daily course
-- Blocks slow the player; green pads boost progress
-- Ghost opponent target: 21.43s
-- Local personal best and replay inputs
-- Instant rematch
-- Web Share / clipboard challenge flow
-- Mobile-first neon UI
+## V2 features
+- Deterministic daily Speed Grid course
+- Swipe/tap three-lane controls
+- Obstacles, boost pads and instant rematch
+- Recorded lane-change ghost replay
+- Supabase-backed anonymous player sessions
+- Player profile, coins and rank points
+- Online daily leaderboard
+- Real challenge codes (`?c=...`) that load another player's run
+- Web Share / clipboard challenge sharing
+- Installable PWA shell + offline cache
+- Local fallback mode if the backend is unavailable
 
 ## Run locally
 
-From this folder:
-
 ```bash
+cd apps/ghost-rush
 python -m http.server 8080
 ```
 
-Open `http://localhost:8080`.
+Open `http://127.0.0.1:8080`.
 
-You can also open `index.html` directly in a browser, though serving it locally is preferred.
+## Online mode
+The client is wired to the configured Supabase project in `config.js`. The database uses the isolated `ghost_profiles`, `ghost_runs`, and `ghost_challenges` tables with RLS. Anonymous Sign-Ins must be enabled in Supabase Auth for zero-friction online play. If Auth is unavailable, the game automatically remains playable in local mode.
 
 ## Controls
-- Mobile: swipe left/right or tap the left/right side of the game
-- Desktop: left/right arrow keys or A/D
+- Mobile: swipe left/right or tap either side of the playfield
+- Desktop: Arrow Left/Right or A/D
 
-## Next build steps
-1. Replace the placeholder runner/ghost shapes with authored art and animation.
-2. Store ghost run data and leaderboard results in Supabase.
-3. Generate challenge IDs so another device can race the exact recorded run.
-4. Add authentication and profiles.
-5. Add a second micro-game and shared season progression.
-6. Add analytics events for start, completion, rematch, share, and retention.
-7. Package the validated core loop for Android/iOS.
+## Current security boundary
+V2 uses RLS for row ownership and database access, but gameplay scoring is still client-reported. Treat rankings and coins as beta/non-cash values until run validation becomes server-authoritative.
 
-The MVP intentionally keeps monetization out of the first gameplay test. Validate repeat play and challenge sharing first, then add rewarded ads/cosmetics.
+## V3 target
+- Server-authoritative run validation / anti-cheat
+- Better animated character + authored world art
+- Second mini-game
+- Seasons, quests and cosmetics
+- Push/share deep links
+- Capacitor/native packaging for Android and iOS
+- Analytics + retention funnel
