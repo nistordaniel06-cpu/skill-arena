@@ -1,19 +1,22 @@
-# Ghost Rush V2
+# Ghost Rush V3
 
-Mobile-first competitive micro-game prototype with real recorded challenge links.
+Mobile-first competitive micro-game prototype focused on fast replayable cyber sprints against recorded player ghosts.
 
-## V2 features
+## V3 features
 - Deterministic daily Speed Grid course
-- Swipe/tap three-lane controls
-- Obstacles, boost pads and instant rematch
-- Recorded lane-change ghost replay
-- Supabase-backed anonymous player sessions
-- Player profile, coins and rank points
+- 3-lane swipe/tap controls
+- Real recorded ghost replay
+- Challenge links (`?c=...`) that load another player's run
+- Supabase anonymous player sessions
 - Online daily leaderboard
-- Real challenge codes (`?c=...`) that load another player's run
-- Web Share / clipboard challenge sharing
-- Installable PWA shell + offline cache
-- Local fallback mode if the backend is unavailable
+- Player profiles, rank points and coins
+- Countdown + synthesized game audio + mobile haptics
+- Cyber-city canvas art, speed lines, screen shake and impact feedback
+- Obstacles, boost gates and collectible shards
+- Combo system and per-run rewards
+- Daily mission: collect 8 shards for a bonus
+- Installable portrait PWA with V3 cache refresh
+- Local fallback if online mode is unavailable
 
 ## Run locally
 
@@ -22,23 +25,28 @@ cd apps/ghost-rush
 python -m http.server 8080
 ```
 
-Open `http://127.0.0.1:8080`.
+Open:
+
+```text
+http://127.0.0.1:8080
+```
+
+`index.html` automatically routes to `v3.html` and preserves challenge query parameters. V2 source remains in `app.js` for fallback/reference; the active V3 engine is `v3.js`.
 
 ## Online mode
-The client is wired to the configured Supabase project in `config.js`. The database uses the isolated `ghost_profiles`, `ghost_runs`, and `ghost_challenges` tables with RLS. Anonymous Sign-Ins must be enabled in Supabase Auth for zero-friction online play. If Auth is unavailable, the game automatically remains playable in local mode.
+The client uses the configured Supabase project in `config.js` and the isolated `ghost_profiles`, `ghost_runs`, and `ghost_challenges` tables. RLS is enabled. Anonymous Sign-Ins must be enabled in Supabase Auth for zero-friction online play.
 
 ## Controls
 - Mobile: swipe left/right or tap either side of the playfield
 - Desktop: Arrow Left/Right or A/D
 
-## Current security boundary
-V2 uses RLS for row ownership and database access, but gameplay scoring is still client-reported. Treat rankings and coins as beta/non-cash values until run validation becomes server-authoritative.
+## Security boundary
+Rankings, rewards and run times are still client-reported in this beta. Before any cash-value economy, paid competitive entry, or meaningful prizes, move run validation and rewards server-side and add anti-cheat validation.
 
-## V3 target
-- Server-authoritative run validation / anti-cheat
-- Better animated character + authored world art
-- Second mini-game
-- Seasons, quests and cosmetics
-- Push/share deep links
-- Capacitor/native packaging for Android and iOS
-- Analytics + retention funnel
+## Next milestone
+1. Server-authoritative run validation / anti-cheat
+2. Second mini-game sharing the same profile/season economy
+3. Cosmetics and unlockable ghost bodies/trails
+4. Analytics for start -> finish -> rematch -> share -> D1 retention
+5. Native packaging for Android/iOS
+6. Store assets, onboarding, privacy policy and closed beta
