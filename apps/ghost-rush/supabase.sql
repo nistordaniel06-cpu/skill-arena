@@ -1,8 +1,9 @@
--- Ghost Rush V2 isolated schema. Safe to apply alongside other public tables.
+-- Ghost Rush V4 isolated schema. Safe to apply alongside other public tables.
 create table if not exists public.ghost_profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   display_name text not null default 'Ghost',
   rank_points integer not null default 0 check (rank_points >= 0),
+  xp integer not null default 0 check (xp >= 0),
   coins integer not null default 420 check (coins >= 0),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -13,7 +14,8 @@ create table if not exists public.ghost_runs (
   user_id uuid not null references auth.users(id) on delete cascade,
   player_name text not null default 'Ghost',
   daily_seed integer not null,
-  elapsed_ms integer not null check (elapsed_ms between 3000 and 120000),
+  game_mode text not null default 'speed_grid',
+  elapsed_ms integer not null check (elapsed_ms between 0 and 120000),
   actions jsonb not null default '[]'::jsonb,
   created_at timestamptz not null default now()
 );
@@ -27,7 +29,13 @@ create table if not exists public.ghost_challenges (
   expires_at timestamptz not null default (now() + interval '14 days')
 );
 
+alter table public.ghost_profiles add column if not exists xp integer not null default 0;
+alter table public.ghost_runs add column if not exists game_mode text not null default 'speed_grid';
+alter table public.ghost_runs drop constraint if exists ghost_runs_elapsed_ms_check;
+alter table public.ghost_runs add constraint ghost_runs_elapsed_ms_check check (elapsed_ms between 0 and 120000);
+
 create index if not exists ghost_runs_daily_leaderboard_idx on public.ghost_runs (daily_seed, elapsed_ms asc, created_at asc);
+create index if not exists ghost_runs_mode_daily_idx on public.ghost_runs (game_mode, daily_seed, elapsed_ms asc);
 create index if not exists ghost_runs_user_idx on public.ghost_runs (user_id, created_at desc);
 create index if not exists ghost_challenges_run_id_idx on public.ghost_challenges (run_id);
 create index if not exists ghost_challenges_created_by_idx on public.ghost_challenges (created_by);
