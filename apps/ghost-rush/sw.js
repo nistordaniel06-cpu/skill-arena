@@ -1,8 +1,8 @@
-const CACHE='ghost-rush-v3-20260921b';
-const ASSETS=['./','./index.html','./v3.html','./v3.js','./config.js','./manifest.webmanifest'];
+const CACHE='ghost-rush-v4-20260921a';
+const ASSETS=['./','./index.html','./v4.html','./v4.js','./config.js','./manifest.webmanifest'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));});
 self.addEventListener('activate',e=>{e.waitUntil(Promise.all([self.clients.claim(),caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))]));});
 self.addEventListener('fetch',e=>{
   if(e.request.method!=='GET')return;
-  e.respondWith(fetch(e.request).then(r=>{const clone=r.clone();caches.open(CACHE).then(c=>c.put(e.request,clone));return r;}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./v3.html'))));
+  e.respondWith(fetch(e.request).then(r=>{const clone=r.clone();caches.open(CACHE).then(c=>c.put(e.request,clone));return r;}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./v4.html'))));
 });
