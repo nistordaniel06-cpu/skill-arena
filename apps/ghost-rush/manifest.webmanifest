@@ -1,0 +1,11 @@
+{
+  "name":"Ghost Rush V4",
+  "short_name":"Ghost Rush",
+  "description":"Fast competitive micro-games against recorded player ghosts.",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#050815",
+  "theme_color":"#050815",
+  "orientation":"portrait-primary",
+  "categories":["games","entertainment"]
+}

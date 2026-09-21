@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#050815" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>Ghost Rush</title>
+</head>
+<body style="margin:0;background:#050815;color:white;font-family:system-ui;display:grid;place-items:center;min-height:100vh">
+  <div>Loading Ghost Rush V4…</div>
+  <script>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+    location.replace('v4.html'+location.search+location.hash);
+  </script>
+</body>
+</html>
